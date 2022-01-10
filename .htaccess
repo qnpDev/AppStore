@@ -1,0 +1,75 @@
+Options -Indexes
+
+#ErrorDocument 402 /ERROR/404.htm
+#ErrorDocument 403 /ERROR/404.htm
+#ErrorDocument 404 /ERROR/404.htm
+#ErrorDocument 500 /ERROR/404.htm
+DirectoryIndex index.php
+RemoveHandler .phtml .php3 .php4 .php5 .php6 .phps .cgi .pl .asp .aspx .shtml .shtm .fcgi .fpl .jsp .py
+AddType application/x-httpd-php-source .phtml .php3 .php4 .php5 .php6 .phps .cgi .pl .asp .aspx .shtml .shtm .fcgi .fpl .jsp .py
+AddDefaultCharset UTF-8
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault A1209600
+<FilesMatch \.php$>
+ExpiresActive Off
+</FilesMatch>
+</IfModule>
+
+RewriteEngine On
+
+RewriteRule ^404$ error/404.php [L]
+
+#Rewrite users
+RewriteRule ^login$ login.php [L]
+RewriteRule ^regis$ regis.php [L]
+RewriteRule ^forgot$ forgot.php [L]
+RewriteRule ^logout$ logout.php [L]
+RewriteRule ^home$ index.php [L]
+RewriteRule ^change-pass$ users/passchange.php [L]
+RewriteRule ^profile$ users/profile.php [L]
+RewriteRule ^profile-([0-9]+)$ users/profile.php?id=$1 [L]
+RewriteRule ^profile-edit-([0-9]+)$ users/edit.php?id=$1 [L]
+RewriteRule ^upgrade$ upgrade.php [L]
+RewriteRule ^forgot/(.*)$ forgot.php?recovery=$1 [L]
+
+#rewrite app
+RewriteRule ^app/freeapp$ apps/listfree.php [L]
+RewriteRule ^app/paidapp$ apps/paidapp.php [L]
+RewriteRule ^app-([0-9]+)$ apps/detail.php?id=$1 [L]
+RewriteRule ^app-([0-9]+)/review$ apps/rate.php?id=$1 [L]
+RewriteRule ^app/all$ apps/index.php [L]
+RewriteRule ^app/([a-z]+)$ apps/index.php?type=$1 [L]
+RewriteRule ^user/bought$ users/appbought.php [L]
+RewriteRule ^user-([0-9]+)/bought$ users/appbought.php?id=$1 [L]
+RewriteRule ^user/naptien$ users/naptien.php [L]
+RewriteRule ^app/download/(.*)$ apps/download.php?file=$1 [L]
+
+
+#rewrite dev
+RewriteRule ^dev/quanli$ developer/quanli.php [L]
+RewriteRule ^dev/$ developer/quanli.php [L]
+RewriteRule ^dev$ developer/quanli.php [L]
+RewriteRule ^dev/create$ developer/create.php [L]
+RewriteRule ^dev/create/$ developer/create.php [L]
+RewriteRule ^dev/profile-([0-9]*)$ developer/index.php?id=$1 [L]
+RewriteRule ^dev/profile/$ developer/index.php [L]
+RewriteRule ^dev/profile$ developer/index.php [L]
+RewriteRule ^dev/thongke/$ developer/thongke.php [L]
+RewriteRule ^dev/thongke$ developer/thongke.php [L]
+RewriteRule ^dev/listapp$ developer/listapp.php [L]
+RewriteRule ^dev/listapp/$ developer/listapp.php [L]
+RewriteRule ^dev/edit-([0-9]*)$ developer/edit.php?id=$1 [L]
+RewriteRule ^dev/changeapp-([0-9]+)-(.*)$ developer/change.php?id=$1&type=$2 [L]
+
+#rewrite admin
+RewriteRule ^admin/theloai/$ admin/theloai.php [L]
+RewriteRule ^admin/theloai$ admin/theloai.php [L]
+RewriteRule ^admin/theloai/edit-([0-9]+)$ admin/edittheloai.php?id=$1 [L]
+RewriteRule ^admin/card/$ admin/card.php [L]
+RewriteRule ^admin/card$ admin/card.php [L]
+RewriteRule ^admin/app$ admin/app.php [L]
+RewriteRule ^admin/duyetapp$ admin/duyetapp.php [L]
+RewriteRule ^admin/users$ admin/users.php [L]
+RewriteRule ^admin/developer$ admin/dev.php [L]
+
